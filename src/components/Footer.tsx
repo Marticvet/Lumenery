@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import { FaLeaf, FaRegHeart, FaRegStar, FaRegUser } from "react-icons/fa6";
 
 const values = [
-    { icon: "♡", title: "Mit Liebe zum Detail", text: "Für einzigartige Designs" },
-    { icon: "♧", title: "Nachhaltig gedacht", text: "Bewusste Materialauswahl" },
-    { icon: "♙", title: "Persönliche Begleitung", text: "Wir sind für dich da" },
-    { icon: "◎", title: "Für besondere Menschen", text: "In Deutschland & Bulgarien" },
+    { icon: FaRegHeart, title: "Mit Liebe zum Detail", text: "Für einzigartige Designs" },
+    { icon: FaLeaf, title: "Nachhaltig gedacht", text: "Bewusste Materialauswahl" },
+    { icon: FaRegUser, title: "Persönliche Begleitung", text: "Wir sind für dich da" },
+    { icon: FaRegStar, title: "Für besondere Menschen", text: "In Deutschland & Bulgarien" },
 ];
 
 export default function Footer() {
@@ -21,13 +22,17 @@ export default function Footer() {
                     />
                     <span>LUMYNERY</span>
                 </Link>
-                {values.map((value) => (
-                    <div className="site-footer__value" key={value.title}>
-                        <span aria-hidden>{value.icon}</span>
-                        <p>{value.title}</p>
-                        <small>{value.text}</small>
-                    </div>
-                ))}
+                {values.map((value) => {
+                    const Icon = value.icon;
+
+                    return (
+                        <div className="site-footer__value" key={value.title}>
+                            <span aria-hidden><Icon /></span>
+                            <p>{value.title}</p>
+                            <small>{value.text}</small>
+                        </div>
+                    );
+                })}
             </div>
             <div className="site-footer__bottom">
                 <p>© LUMYNERY 2026 · Alle Rechte vorbehalten.</p>

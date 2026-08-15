@@ -71,7 +71,9 @@ export default function CatalogPage() {
             </section>
 
             <section className="catalog-story">
-                <div>
+                <div className="catalog-story__copy">
+                    <p className="eyebrow">Lumynery Design House</p>
+                    <h2>Design, das persönlich bleibt.</h2>
                     <p>
                         Bei Lumynery entstehen individuelle Designs mit viel Liebe zum Detail. Ob
                         Hochzeit, Unternehmen oder persönliche Geschenke – jedes Produkt wird speziell

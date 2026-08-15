@@ -4,7 +4,7 @@ export const metadata: Metadata = { title: "Allgemeine Geschäftsbedingungen" };
 
 export default function TermsPage() {
     return (
-        <article className="legal-page inner-page page-shell">
+        <article className="legal-page legal-page--terms inner-page page-shell">
             <p>Lumynery</p>
             <p>Stand: August 2026</p>
             <h1 className="sr-only">Allgemeine Geschäftsbedingungen</h1>

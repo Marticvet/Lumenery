@@ -4,7 +4,7 @@ export const metadata: Metadata = { title: "Impressum" };
 
 export default function ImprintPage() {
     return (
-        <article className="legal-page inner-page page-shell">
+        <article className="legal-page legal-page--imprint inner-page page-shell">
             <h1>Impressum</h1>
             <section>
                 <p>Angaben gemäß § 5 DDG</p>

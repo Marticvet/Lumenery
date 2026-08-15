@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { FaEnvelope, FaFacebookF, FaInstagram } from "react-icons/fa6";
 import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = {
@@ -14,13 +15,13 @@ export default function ContactPage() {
                 <section className="contact-channels" aria-labelledby="contact-channels-title">
                     <h2 id="contact-channels-title">Oder kontaktiere uns über:</h2>
                     <a href="https://www.facebook.com/" className="contact-channel contact-channel--facebook">
-                        <span>f</span>LUMYNERY.DESIGN
+                        <span aria-hidden><FaFacebookF /></span>LUMYNERY.DESIGN
                     </a>
                     <a href="https://www.instagram.com/" className="contact-channel contact-channel--instagram">
-                        <span>◎</span>LUMYNERY.DESIGN
+                        <span aria-hidden><FaInstagram /></span>LUMYNERY.DESIGN
                     </a>
                     <a href="mailto:hello@lumynery.de" className="contact-channel contact-channel--email">
-                        <span>✉</span>EMAIL
+                        <span aria-hidden><FaEnvelope /></span>EMAIL
                     </a>
                 </section>
             </div>
