@@ -1,13 +1,25 @@
-import styles from '../scss/navbar/navbar.module.css';
 import Link from "next/link";
+
+const links = [
+    { href: "/#ueber-uns", label: "Über uns" },
+    { href: "/katalog", label: "Katalog" },
+    { href: "/leistungen", label: "Leistungen" },
+    { href: "/kontakt", label: "Kontakt" },
+];
 
 export default function Navbar() {
     return (
-        <nav className={styles.navbar}>
-            <Link className={styles.link} href="/">Lumenery</Link>
-            <Link className={styles.link} href="/ueber-uns">Über uns</Link>
-            <Link className={styles.link} href="/leistungen">Leistungen</Link>
-            <Link className={styles.link} href="/kontakt">Kontakt</Link>
-        </nav>
+        <header className="site-header">
+            <Link href="/" className="site-header__brand" aria-label="Lumynery Startseite">
+                LUMYNERY
+            </Link>
+            <nav className="site-nav" aria-label="Hauptnavigation">
+                {links.map((link) => (
+                    <Link key={link.href} href={link.href}>
+                        {link.label}
+                    </Link>
+                ))}
+            </nav>
+        </header>
     );
 }
