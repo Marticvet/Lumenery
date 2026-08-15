@@ -1,0 +1,152 @@
+.homePage {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: #e4e0dc;
+  overflow: hidden;
+}
+.homePage .landingView {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 10rem;
+  position: relative;
+  padding-bottom: 10rem;
+  min-height: 100vh;
+}
+.homePage .landingView .background {
+  -o-object-fit: cover;
+     object-fit: cover;
+  z-index: 0;
+  width: 100px;
+  height: 100px;
+}
+.homePage .landingView .content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 78rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #3d2d2d;
+}
+.homePage .landingView .content h1 {
+  font-size: 5rem;
+  letter-spacing: 0.5rem;
+}
+.homePage .landingView .content p {
+  margin: 1rem 0;
+  letter-spacing: 0.2rem;
+  width: 25rem;
+  text-align: center;
+  font-size: 1.8rem;
+}
+.homePage .landingView .content button {
+  margin-top: 2rem;
+  width: 20rem;
+  height: 5rem;
+  font-size: 2rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 999px;
+  background: white;
+  cursor: pointer;
+}
+.homePage .landingView .content .socials {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 4rem;
+}
+.homePage .landingView .content .socials a {
+  color: #69443c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+.homePage .landingView .content .socials a:hover {
+  transform: translateY(-4px) scale(1.08);
+  color: #8a5a4d;
+}
+.homePage .landingView .content .socials a svg {
+  width: 40px;
+  height: 40px;
+  display: block;
+}
+.homePage .about {
+  height: 100rem;
+  max-width: 80vw;
+  margin: 3rem;
+  display: flex;
+  flex-direction: column;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 6rem 2rem;
+}
+.homePage .about .topContainer {
+  display: flex;
+  padding: 6rem 4rem;
+  gap: 4rem;
+  justify-content: center;
+  align-items: center;
+}
+.homePage .about .topContainer .leftSide,
+.homePage .about .topContainer .rightSide {
+  display: flex;
+  flex: 1;
+  height: 30rem;
+  flex-basis: 50%;
+}
+.homePage .about .topContainer .leftSide {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-right: 0.3rem;
+}
+.homePage .about .topContainer .leftSide h2 {
+  font-size: 2rem;
+  width: 60rem;
+}
+.homePage .about .topContainer .rightSide {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 4rem;
+}
+.homePage .about .topContainer .rightSide h1 {
+  font-size: 4.4rem;
+}
+.homePage .about .topContainer .rightSide p {
+  font-size: 2rem;
+  width: 80%;
+}
+.homePage .about .topContainer .rightSide .buttonsContainer {
+  width: 54rem;
+  margin-top: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.homePage .about .topContainer .rightSide .buttonsContainer button {
+  font-size: 1.8rem;
+  width: 22.4rem;
+  height: 4.4rem;
+  border-radius: 8px;
+  background: #c5a49d;
+  text-align: center;
+}
+.homePage .about .topContainer .rightSide .buttonsContainer button:hover {
+  cursor: pointer;
+}
+.homePage .about .bottomContainer {
+  width: 100%;
+  height: 50rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}/*# sourceMappingURL=home.module.css.map */

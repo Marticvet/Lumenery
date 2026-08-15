@@ -1,0 +1,27 @@
+.navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100%;
+  background: transparent;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 2rem;
+}
+
+.link {
+  color: #333;
+  text-decoration: none;
+  font-size: 2rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+.link:hover {
+  color: #0070f3;
+}
+.link:active {
+  color: #0051b3;
+}/*# sourceMappingURL=navbar.module.css.map */
