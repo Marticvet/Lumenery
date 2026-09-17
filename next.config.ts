@@ -1,8 +1,15 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   reactCompiler: true,
+  skipTrailingSlashRedirect: true,
+  async rewrites() {
+    return [
+      { source: "/lmx/static/:path*", destination: "https://eu-assets.i.posthog.com/static/:path*" },
+      { source: "/lmx/array/:path*", destination: "https://eu-assets.i.posthog.com/array/:path*" },
+      { source: "/lmx/:path*", destination: "https://eu.i.posthog.com/:path*" },
+    ];
+  },
 };
 
 export default nextConfig;

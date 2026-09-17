@@ -6,10 +6,14 @@
     "dev": "next dev",
     "build": "next build --webpack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "node --test tests/functionality.test.cjs",
+    "test:routes": "node --test tests/routes.test.cjs"
   },
   "dependencies": {
     "next": "16.3.0",
+    "nodemailer": "^9.1.1",
+    "posthog-js": "^1.433.5",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "react-icons": "^5.7.0"
@@ -17,6 +21,7 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
+    "@types/nodemailer": "^8.0.2",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "babel-plugin-react-compiler": "1.0.0",
