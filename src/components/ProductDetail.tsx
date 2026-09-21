@@ -3,6 +3,7 @@ import Link from "next/link";
 import type {Locale} from "@/i18n/config";
 import type {Translate} from "@/i18n/server";
 import type {CatalogProduct} from "@/sanity/types";
+import ProductEnquiry from "@/components/ProductEnquiry";
 
 export default function ProductDetail({product, locale, t}: {product: CatalogProduct; locale: Locale; t: Translate}) {
   return <div className="product-detail-page inner-page">
@@ -12,7 +13,7 @@ export default function ProductDetail({product, locale, t}: {product: CatalogPro
         <h1>{product.title}</h1>
         {(product.shortDescription || product.description) && <p>{product.shortDescription || product.description}</p>}
         <p>{product.displayPrice}</p>
-        <Link href={`/${locale}/kontakt`} className="button button--rose">{t("Jetzt anfragen")}</Link>
+        <ProductEnquiry locale={locale} productTitle={product.title} quantityLabel={t("Menge")} actionLabel={t("Jetzt anfragen")} />
         {product.features.length > 0 && <ul className="product-features">
           {product.features.map((feature) => <li key={feature}>✓ {feature}</li>)}
         </ul>}

@@ -112,6 +112,10 @@ test("submission validation trims input and rejects bad or oversized fields", ()
         assert.ok(result.fields.includes(field));
     }
     assert.equal(parse({ ...submission, data: { ...submission.data, website: "bot.example" } }).status, "honeypot");
+    const productEnquiry = parse({ ...submission, data: { ...submission.data, product: "Invitations", quantity: "25" } });
+    assert.equal(productEnquiry.status, "valid");
+    assert.equal(productEnquiry.submission.quantity, "25");
+    assert.equal(parse({ ...submission, data: { ...submission.data, product: "Invitations", quantity: "0" } }).status, "invalid");
 });
 
 test("SMTP config fails closed and always uses the authenticated mailbox as sender", (t) => {
@@ -154,6 +158,17 @@ test("localized mail templates escape submitted HTML and share one reference", (
         assert.match(receipt.html, new RegExp(`<html lang="${locale}">`));
         assert.ok(internal.html.includes("&lt;img"));
     }
+});
+
+test("internal notification includes the selected product and quantity", () => {
+    const { createInternalNotification, createCustomerAcknowledgement } = loader()("src/lib/email/templates.ts");
+    const productSubmission = { ...submission.data, kind: "project", locale: "en", product: "Invitations", quantity: "40" };
+    const notification = createInternalNotification(productSubmission, "LUM-TEST-1234", config);
+    const acknowledgement = createCustomerAcknowledgement(productSubmission, "LUM-TEST-1234", config);
+    assert.match(notification.text, /Product: Invitations/);
+    assert.match(notification.text, /Quantity: 40/);
+    assert.match(acknowledgement.text, /Product: Invitations/);
+    assert.match(acknowledgement.text, /change or cancel your enquiry/);
 });
 
 function contactApi({ configurationFailure = false, failedDelivery = 0 } = {}) {

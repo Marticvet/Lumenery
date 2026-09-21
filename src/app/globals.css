@@ -723,6 +723,27 @@ select {
     font-weight: 500;
 }
 
+.contact-form__product {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 120px;
+    gap: 14px;
+    margin: 0;
+    padding: 16px;
+    border: 1px solid rgba(181, 164, 147, 0.72);
+    border-radius: 10px;
+    background: #f5efeb;
+}
+
+.contact-form__product legend {
+    padding-inline: 7px;
+    font-family: var(--font-serif), serif;
+    font-size: 1rem;
+}
+
+.contact-form__product input[readonly] {
+    background: rgba(255, 255, 255, 0.62);
+}
+
 .contact-form label {
     display: grid;
     gap: 8px;
@@ -1241,8 +1262,13 @@ body:has(.catalog-page) .site-header {
 .business-cta ul {
     display: grid;
     gap: 28px;
+    margin-bottom: 0;
     padding: 0;
     list-style: none;
+}
+
+.business-cta .button {
+    margin-top: 28px;
 }
 
 /* Product detail */
@@ -1278,6 +1304,39 @@ body:has(.catalog-page) .site-header {
     margin: 8px 0;
     font-size: 1.35rem;
     line-height: 1.4;
+}
+
+.product-enquiry {
+    margin-top: 28px;
+}
+
+.product-enquiry > label {
+    display: block;
+    margin-bottom: 9px;
+    font-size: 1rem;
+}
+
+.product-enquiry__controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: stretch;
+}
+
+.product-enquiry input {
+    width: 92px;
+    min-height: 44px;
+    padding: 8px 12px;
+    border: 1px solid rgba(37, 29, 27, 0.36);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.72);
+    color: var(--ink);
+    font: inherit;
+    text-align: center;
+}
+
+.product-enquiry .button {
+    min-height: 44px;
 }
 
 .product-features {
@@ -1738,6 +1797,10 @@ body:has(.catalog-page) .site-header {
     .contact-form {
         padding: 18px;
         border-width: 6px;
+    }
+
+    .contact-form__product {
+        grid-template-columns: 1fr;
     }
 
     .contact-channels h2 {

@@ -7,7 +7,7 @@ import type { UICopy } from "@/i18n/ui";
 import { limits, parseContactSubmission, type ContactField } from "@/lib/contact/submission";
 import { captureContactEvent } from "@/lib/analytics";
 
-export default function ContactForm({ locale, t }: { locale: Locale; t: UICopy["form"] }) {
+export default function ContactForm({ locale, t, initialProduct = "", initialQuantity = "1" }: { locale: Locale; t: UICopy["form"]; initialProduct?: string; initialQuantity?: string }) {
     const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
     const [errors, setErrors] = useState<Partial<Record<ContactField, string>>>({});
     const [errorMessage, setErrorMessage] = useState("");
@@ -66,6 +66,11 @@ export default function ContactForm({ locale, t }: { locale: Locale; t: UICopy["
     return (
         <form className="contact-form ph-no-capture ph-no-record" data-analytics-block onSubmit={submitForm} noValidate aria-busy={status === "sending"}>
             <h1>{t.title}</h1>
+            {initialProduct && <fieldset className="contact-form__product">
+                <legend>{t.productSelection}</legend>
+                <label htmlFor="contact-product">{t.product}<input {...fieldProps("product")} value={initialProduct} readOnly /></label>
+                <label htmlFor="contact-quantity">{t.quantity}<input {...fieldProps("quantity")} type="number" min={1} max={9999} step={1} inputMode="numeric" defaultValue={initialQuantity} required />{error("quantity")}</label>
+            </fieldset>}
             <label htmlFor="contact-name">{t.name}<input {...fieldProps("name")} autoComplete="name" required />{error("name")}</label>
             <label htmlFor="contact-email">{t.email}<input {...fieldProps("email")} type="email" autoComplete="email" required />{error("email")}</label>
             <label htmlFor="contact-address">{t.address}<textarea {...fieldProps("address")} rows={2} autoComplete="street-address" />{error("address")}</label>
@@ -78,6 +83,7 @@ export default function ContactForm({ locale, t }: { locale: Locale; t: UICopy["
                 <p>{t.success}</p>
                 <p>{t.reference}: <strong>{receipt.reference}</strong></p>
                 <p>{receipt.confirmationSent ? t.confirmation.replace("{email}", receipt.email) : t.confirmationPending}</p>
+                <p>{t.manage}</p>
             </div>}
             {status === "error" && <p className="contact-form__error" role="alert">{errorMessage}</p>}
         </form>

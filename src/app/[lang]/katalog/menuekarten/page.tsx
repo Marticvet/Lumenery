@@ -4,6 +4,7 @@ import { pageMetadata } from "@/i18n/metadata";
 import Image from "next/image";
 import Link from "next/link";
 import ProductDetail from "@/components/ProductDetail";
+import ProductEnquiry from "@/components/ProductEnquiry";
 import {getProductBySlug} from "@/sanity/products";
 import {catalogProductMetadata} from "@/sanity/metadata";
 
@@ -23,7 +24,7 @@ export default async function MenuCardsPage(props: LocalePageProps) {
                     <h1>{t("Menükarten –")}<br />{t("individuell gestaltet")}</h1>
                     <p>{t("Perfekt abgestimmt auf eure Hochzeit, Taufe oder Feier. Jede Karte wird nach euren Wünschen gestaltet.")}</p>
                     <p>{t("ab 6,99 € pro Stück")}</p>
-                    <Link href={href("/kontakt")} className="button button--rose">{t("Jetzt anfragen")}</Link>
+                    <ProductEnquiry locale={locale} productTitle={t("Menükarten – individuell gestaltet")} quantityLabel={t("Menge")} actionLabel={t("Jetzt anfragen")} />
                     <ul className="product-features">
                         {features.map((feature) => <li key={feature}>✓ {feature}</li>)}
                     </ul>

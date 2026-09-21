@@ -6,14 +6,19 @@ import { ui } from "@/i18n/ui";
 import ContactForm from "@/components/ContactForm";
 import { getContactEmail } from "@/config/site";
 
-export default async function ContactPage(props: LocalePageProps) {
+type ContactPageProps = LocalePageProps & {searchParams: Promise<{product?: string | string[]; quantity?: string | string[]}>};
+
+export default async function ContactPage(props: ContactPageProps) {
     const { locale, t } = await getPageContext(props);
+    const search = await props.searchParams;
     const email = getContactEmail();
+    const initialProduct = typeof search.product === "string" ? search.product.trim().slice(0, 200) : "";
+    const requestedQuantity = typeof search.quantity === "string" && /^[1-9]\d{0,3}$/.test(search.quantity) ? search.quantity : "1";
 
     return (
         <div className="contact-page">
             <div className="contact-page__content page-shell">
-                <ContactForm locale={locale} t={ui[locale].form} />
+                <ContactForm locale={locale} t={ui[locale].form} initialProduct={initialProduct} initialQuantity={requestedQuantity} />
                 <section className="contact-channels" aria-labelledby="contact-channels-title">
                     <h2 id="contact-channels-title">{t("Oder kontaktiere uns über:")}</h2>
                     <a href="https://www.facebook.com/" className="contact-channel contact-channel--facebook">

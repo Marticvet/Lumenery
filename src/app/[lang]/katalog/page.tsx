@@ -33,7 +33,7 @@ export default async function CatalogPage(props: LocalePageProps) {
                     sortDefault: t("Sortieren nach"), price: t("Preis"), name: t("Name"),
                     learnMore: t("Mehr erfahren →"), empty: t("Keine Produkte in dieser Kategorie."),
                 }} />
-                <Link href={href("/kontakt")} className="button button--rose catalog-products__cta">{t("Zum Gesamtkatalog")}</Link>
+                <Link href={href("/katalog#products")} className="button button--rose catalog-products__cta">{t("Zum Gesamtkatalog")}</Link>
             </section>
 
             <section className="order-flow page-shell section-pad" aria-labelledby="order-flow-title">
