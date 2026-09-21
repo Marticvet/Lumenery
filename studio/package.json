@@ -1,0 +1,22 @@
+{
+  "name": "lumynery-studio",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "sanity dev",
+    "build": "sanity build",
+    "deploy": "sanity deploy",
+    "seed": "sanity exec scripts/seed.ts"
+  },
+  "dependencies": {
+    "@sanity/vision": "latest",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "sanity": "latest",
+    "styled-components": "^6.5.3"
+  },
+  "devDependencies": {
+    "@types/react": "^19",
+    "typescript": "^5"
+  }
+}

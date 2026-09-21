@@ -3,6 +3,9 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactCompiler: true,
   skipTrailingSlashRedirect: true,
+  images: {
+    remotePatterns: [{protocol: "https", hostname: "cdn.sanity.io", pathname: "/images/**"}],
+  },
   async rewrites() {
     return [
       { source: "/lmx/static/:path*", destination: "https://eu-assets.i.posthog.com/static/:path*" },

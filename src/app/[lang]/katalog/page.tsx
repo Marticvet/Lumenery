@@ -3,14 +3,12 @@ import { pageMetadata } from "@/i18n/metadata";
 
 import Image from "next/image";
 import Link from "next/link";
+import CatalogProducts from "@/components/CatalogProducts";
+import {getCatalogContent} from "@/sanity/products";
 
 export default async function CatalogPage(props: LocalePageProps) {
     const { locale, t, href } = await getPageContext(props);
-    const products = [
-        { image: "/lumynery/product-menu.jpg", name: t("Menü – individuell"), price: t("ab 6,99€ pro Stück"), href: href("/katalog/menuekarten") },
-        { image: "/lumynery/product-invite.jpg", name: t("Einladungen"), price: t("3,50€ pro Stück"), href: href("/kontakt") },
-        { image: "/lumynery/product-table.jpg", name: t("Tischdeko"), price: t("3,50€ pro Stück"), href: href("/kontakt") },
-    ];
+    const {products, categories} = await getCatalogContent(locale);
     const order = [
         ["✉", t("Anfrage senden"), t("Schreib uns deine Wünsche.")],
         ["▧", t("Design erhalten"), t("Wir erstellen dein individuelles Design.")],
@@ -30,28 +28,11 @@ export default async function CatalogPage(props: LocalePageProps) {
 
             <section className="catalog-products page-shell section-pad" aria-labelledby="catalog-title">
                 <h1 id="catalog-title" className="sr-only">{t("Lumynery Produktkatalog")}</h1>
-                <nav className="category-nav" aria-label={t("Produktkategorien")}>
-                    <a href="#products" className="active">{t("Alle Produkte")}</a>
-                    <a href="#products">{t("Hochzeit")}</a>
-                    <a href="#products">{t("Geburt + Taufe")}</a>
-                    <a href="#products">{t("Einladungen")}</a>
-                    <a href="#products">{t("Geschenksets")}</a>
-                    <select aria-label={t("Produkte sortieren")} defaultValue="featured">
-                        <option value="featured">{t("Sortieren nach")}</option>
-                        <option value="price">{t("Preis")}</option>
-                        <option value="name">{t("Name")}</option>
-                    </select>
-                </nav>
-                <div id="products" className="product-grid">
-                    {products.map((product) => (
-                        <article className="product-card" key={product.name}>
-                            <Image src={product.image} alt={product.name} width={232} height={182} />
-                            <h2>{product.name}</h2>
-                            <p>{product.price}</p>
-                            <Link href={product.href}>{t("Mehr erfahren →")}</Link>
-                        </article>
-                    ))}
-                </div>
+                <CatalogProducts products={products} categories={categories} copy={{
+                    all: t("Alle Produkte"), categoryLabel: t("Produktkategorien"), sortLabel: t("Produkte sortieren"),
+                    sortDefault: t("Sortieren nach"), price: t("Preis"), name: t("Name"),
+                    learnMore: t("Mehr erfahren →"), empty: t("Keine Produkte in dieser Kategorie."),
+                }} />
                 <Link href={href("/kontakt")} className="button button--rose catalog-products__cta">{t("Zum Gesamtkatalog")}</Link>
             </section>
 

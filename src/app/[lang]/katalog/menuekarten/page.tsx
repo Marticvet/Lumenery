@@ -3,9 +3,14 @@ import { pageMetadata } from "@/i18n/metadata";
 
 import Image from "next/image";
 import Link from "next/link";
+import ProductDetail from "@/components/ProductDetail";
+import {getProductBySlug} from "@/sanity/products";
+import {catalogProductMetadata} from "@/sanity/metadata";
 
 export default async function MenuCardsPage(props: LocalePageProps) {
-    const { t, href } = await getPageContext(props);
+    const { locale, t, href } = await getPageContext(props);
+    const managedProduct = await getProductBySlug(locale, "menuekarten");
+    if (managedProduct) return <ProductDetail product={managedProduct} locale={locale} t={t} />;
     const features = [t("Individuelles Design"), t("Hochwertiger Druck"), t("Persönliche Beratung"), t("Schnelle Bearbeitung")];
     const inclusive = [t("Persönliches Design"), t("Unbegrenzte kleine Änderungen"), t("Druckvorbereitung"), t("Hochwertige Druckqualität"), t("Persönliche Beratung")];
     const orderSteps = [t("Anfrage senden"), t("Wünsche besprechen"), t("Designentwurf erhalten"), t("Änderungen vornehmen"), t("Freigabe"), t("Produktion")];
@@ -77,5 +82,8 @@ export default async function MenuCardsPage(props: LocalePageProps) {
 }
 
 export async function generateMetadata(props: LocalePageProps) {
+    const {locale} = await getPageContext(props);
+    const managedProduct = await getProductBySlug(locale, "menuekarten");
+    if (managedProduct) return catalogProductMetadata(managedProduct, locale);
     return pageMetadata(props, "/katalog/menuekarten", "Menükarten – individuell gestaltet", "Individuelle Menükarten für Hochzeit, Taufe oder Feier – persönlich gestaltet und hochwertig gedruckt.", "/lumynery/menu-hero.jpg");
 }

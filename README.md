@@ -13,6 +13,29 @@ Open `http://localhost:3000`. German is the default; the header language selecto
 
 The site runs without an email account or analytics token. Until SMTP is configured, submitting a valid enquiry returns an unavailable message; it does not claim the enquiry was sent. No analytics SDK is loaded and no consent banner appears until a project token is configured.
 
+## Catalog content editor
+
+The repository also contains a Sanity Studio in `studio/`. It is a separate editor application connected to the same catalog used by the Next.js website. Once deployed, the invited administrator can open its private URL from a desktop, tablet or phone to:
+
+- create, hide, reorder and categorize products;
+- edit German, English and Bulgarian names and descriptions;
+- update numeric EUR prices and price units;
+- replace catalog images and reorder gallery photos;
+- edit highlights, included items and search/social metadata.
+
+The storefront remains usable with its built-in starter catalog until Sanity is connected. With a private dataset, the website uses a server-only Viewer token and reads fresh published content on every page request. Drafts and credentials are never exposed to visitors.
+
+### One-time Sanity setup
+
+1. Create a Sanity project with a public `production` dataset at [sanity.io/manage](https://sanity.io/manage).
+2. Copy `studio/.env.example` to `studio/.env.local`, then set `SANITY_STUDIO_PROJECT_ID` to the project ID.
+3. Authenticate with `pnpm studio:login`, or configure a private Editor token as `SANITY_AUTH_TOKEN`. Then run `pnpm studio:seed` once. The seed command uploads the current images and creates the three existing products without manual entry.
+4. Run `pnpm studio:dev` to inspect the editor, then `pnpm studio:deploy` and choose its permanent private editor hostname.
+5. Set `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET=production` and a server-only Viewer token as `SANITY_API_READ_TOKEN` in the website deployment, then rebuild/redeploy the site.
+6. In the Sanity project settings, invite only the intended administrator and remove anyone who should no longer edit content.
+
+Local Studio commands and seed-safety notes are documented in [`studio/README.md`](studio/README.md).
+
 ## Configuration when the domain and mailbox are ready
 
 Use `.env.example` as the template for an ignored `.env.local` in development and set the same variables in the deployment environment. Never commit credentials or reuse Built Further's tracking token.
@@ -27,6 +50,9 @@ Use `.env.example` as the template for an ignored `.env.local` in development an
 | `MAIL_TO_ADDRESS` | Inbox for enquiries; also the site's public contact email. |
 | `NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN` | Lumynery EU project token. Blank disables tracking. Public by design; not an admin/API secret. |
 | `NEXT_PUBLIC_POSTHOG_UI_HOST` | Defaults to `https://eu.posthog.com`. The `/lmx` ingestion proxy in `next.config.ts` uses EU hosting. |
+| `NEXT_PUBLIC_SANITY_PROJECT_ID` | Sanity project identifier shared with the Studio. Blank keeps the built-in starter catalog. Public by design. |
+| `NEXT_PUBLIC_SANITY_DATASET` | Published catalog dataset, normally `production`. Public by design. |
+| `SANITY_API_READ_TOKEN` | Server-only Viewer token used to read published content from a private dataset. Never expose it with a `NEXT_PUBLIC_` prefix. |
 
 Restart development after changing variables. Public PostHog variables are baked into the browser bundle, so rebuild/redeploy when changing them. Use a Node-capable Next.js deployment, not a static export. If a non-EU PostHog project is chosen later, change the proxy destinations as well as the UI host.
 
@@ -55,6 +81,7 @@ Tracking starts only after consent, respects Do Not Track, masks inputs and excl
 pnpm test
 pnpm lint
 pnpm build
+pnpm studio:build
 pnpm start
 # In another terminal, with the local server running:
 pnpm test:routes

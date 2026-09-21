@@ -8,10 +8,16 @@
     "start": "next start",
     "lint": "eslint",
     "test": "node --test tests/functionality.test.cjs",
-    "test:routes": "node --test tests/routes.test.cjs"
+    "test:routes": "node --test tests/routes.test.cjs",
+    "studio:login": "pnpm --dir studio exec sanity login",
+    "studio:dev": "pnpm --dir studio run dev",
+    "studio:build": "pnpm --dir studio run build",
+    "studio:deploy": "pnpm --dir studio run deploy",
+    "studio:seed": "pnpm --dir studio run seed"
   },
   "dependencies": {
     "next": "16.3.0",
+    "next-sanity": "^13.3.4",
     "nodemailer": "^9.1.1",
     "posthog-js": "^1.433.5",
     "react": "19.2.8",
